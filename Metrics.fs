@@ -1,9 +1,11 @@
-module task4
+namespace TextAnalyzer
+
+open Tokenizer
 //  the output i will take from Aliaa (task3)
-type TokenizedText =
+(* type TokenizedText =
     { Words: string list
       Sentences: string list
-      Paragraphs: string list }
+      Paragraphs: string list } *)
 
 module MetricsCalculator =
 
@@ -40,7 +42,7 @@ module MetricsCalculator =
 
 // testing
 
-let exampleTokenized : TokenizedText =
+(* let exampleTokenized : TokenizedText =
     { Words = ["I"; "love"; "AI"; "very"; "much"]
       Sentences = ["I love AI"; "very much"]
       Paragraphs = ["I love AI. very much"] }
@@ -51,4 +53,4 @@ printfn "Word Count: %d" result.WordCount
 printfn "Sentence Count: %d" result.SentenceCount
 printfn "Paragraph Count: %d" result.ParagraphCount
 printfn "Average Sentence Length: %f" result.AverageSentenceLength
-printfn "Readability Score: %f" result.ReadabilityScore
+printfn "Readability Score: %f" result.ReadabilityScore *)

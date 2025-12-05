@@ -1,5 +1,5 @@
 ﻿//module for tokenizing text into words, sentences, and paragraphs
-
+namespace TextAnalyzer
 open System
 //whole module gets called by no.4 text statistics
 //task no.5 frequency analysis calls function getwords only

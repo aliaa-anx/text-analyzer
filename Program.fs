@@ -1,4 +1,4 @@
-﻿open System
+﻿(* open System
 open System.IO
 open System.Text.RegularExpressions
 open System.Windows.Forms
@@ -54,3 +54,34 @@ form.Controls.Add(outputLabel)
 
 [<STAThread>]
 Application.Run(form)
+ *)
+
+
+namespace TextAnalyzer
+
+open System
+open Tokenizer
+open MetricsCalculator
+
+module Program = 
+    [<EntryPoint>]
+    let main argv = 
+        printfn "--- INTEGRATION TEST ---"
+
+        // 1. Create Dummy Data
+        let exampleTokenized : TokenizedText =
+            { Words = ["I"; "love"; "AI"; "very"; "much"]
+              Sentences = ["I love AI"; "very much"]
+              Paragraphs = ["I love AI. very much"] }
+
+        // 2. Call Metrics
+        let result = MetricsCalculator.calculateMetrics exampleTokenized
+
+        // 3. Print Results
+        printfn "Word Count: %d" result.WordCount
+        printfn "Sentence Count: %d" result.SentenceCount
+        printfn "Paragraph Count: %d" result.ParagraphCount
+        printfn "Avg Sentence Length: %.2f" result.AverageSentenceLength
+        printfn "Readability Score: %.2f" result.ReadabilityScore
+
+        0 // Exit code
