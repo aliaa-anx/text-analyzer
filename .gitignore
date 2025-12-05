@@ -1,0 +1,10 @@
+# Build folders (Junk)
+bin/
+obj/
+
+# VS Code settings (Personal)
+.vscode/
+
+# User-specific files
+*.user
+*.suo
