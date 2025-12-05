@@ -1,5 +1,5 @@
 ﻿//module for tokenizing text into words, sentences, and paragraphs
-
+namespace TextAnalyzer
 open System
 //whole module gets called by no.4 text statistics
 //task no.5 frequency analysis calls function getwords only
@@ -15,7 +15,7 @@ module Tokenizer=
   //1.word tokenizer
     let getwords(text:string)=
         // space, !, , . ? ; \t \n
-        let separators=[|' ' ; '!'; ','; '.' ; '?'; ';' ;';' ; '\t' ;'\n'|]
+        let separators=[|' ' ; '!'; ','; '.' ; '?'; ';' ;';' ; '\t' ;'\n';'\r'|]
         text.Split(separators, StringSplitOptions.RemoveEmptyEntries)
         |>Array.toList
    //2.Sentence tokenizer

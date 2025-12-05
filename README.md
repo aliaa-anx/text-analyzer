@@ -1,29 +1,30 @@
-# text-analyzer
-F# Text Analyzer
+##Text Analyzer
+
+##F# Text Analysis Tool
 
 A collaborative text analysis tool built in F#. This application accepts raw text input, breaks it down into tokens, calculates readability metrics, and analyzes word frequency.
 
- How It Works
+Pipeline: How It Works
 
-The application follows a pipeline where text is processed in stages:
+The application follows a clear data pipeline where text is processed in stages:
 
 User Input → Tokenization → Metrics Calculation → Frequency Analysis → Database Storage → UI Display
 
-🛠 Features & Modules
+## Features & Modules
 
-1. Input & Validation (Role 1)
+#1. Input & Validation (Role 1)
 
 Function: Collecting text from the user.
 
 Features:
 
-Support for manual text entry.
+-Support for manual text entry.
 
-Support for .txt file uploads.
+-Support for .txt file uploads.
 
-Validation to ensure content is readable and non-empty.
+-Validation to ensure content is readable and non-empty.
 
-2. Tokenization & GitHub Manager (Role 3 - Implemented)
+#2. Tokenization & GitHub Manager (Role 3 - Implemented)
 
 File: Tokenizer.fs
 
@@ -37,7 +38,7 @@ Splits text into Sentences (based on ., !, ?).
 
 Splits text into Paragraphs (based on new lines).
 
-3. Metrics & Readability (Role 4 - Implemented)
+#3. Metrics & Readability (Role 4 - Implemented)
 
 File: Metrics.fs
 
@@ -51,19 +52,19 @@ Calculates Average Sentence Length.
 
 Computes a basic Readability Score.
 
-4. Frequency Analysis (Role 5)
+#4. Frequency Analysis (Role 5)
 
 Function: Identifying key themes.
 
 Features:
 
-detailed word frequency count.
+Detailed word frequency count.
 
 Filters out common "stop words" (the, a, and, etc.).
 
 Generates a "Top 10" repeated words table.
 
-5. Database & Storage (Role 2)
+#5. Database & Storage (Role 2)
 
 Function: Persistent memory.
 
@@ -73,7 +74,7 @@ Saves analysis results to a local database.
 
 Tables: TextRecord, Statistics, WordFrequency.
 
-6. User Interface (Role 6)
+#6. User Interface (Role 6)
 
 Function: Visual interaction.
 
@@ -83,39 +84,42 @@ Windows-based GUI.
 
 Controls to Analyze, Save, and Export to JSON.
 
- Project Structure
+📂 Project Structure
 
 /text-analyzer
 │
-├── Program.fs          # Main Entry Point & Input Logic
-├── Tokenizer.fs        # Text Splitting Logic (Role 3)
-├── Metrics.fs          # Statistics Logic (Role 4)
-├── TextAnalyzer.fsproj # Main Project Configuration
-├── .gitignore          # Git Settings (Ignores bin/obj)
-└── README.md           # Documentation
+├── Program.fs            # Main Entry Point & Input Logic
+├── Tokenizer.fs          # Text Splitting Logic (Role 3)
+├── Metrics.fs            # Statistics Logic (Role 4)
+├── TextAnalyzer.fsproj   # Main Project Configuration
+├── .gitignore            # Git Settings (Ignores bin/obj)
+└── README.md             # Documentation
 
 
 💻 How to Run
 
 Clone the repository:
 
-git clone https://github.com/aliaa-anx/text-analyzer.git
+git clone [https://github.com/aliaa-anx/text-analyzer.git](https://github.com/aliaa-anx/text-analyzer.git)
 
 
 Navigate to the folder:
 
-cd text-analyzer
+-cd text-analyzer
 
 
-Run the application:
+-Run the application:
 
 dotnet run
 
 
- Contributing
+🤝 Contributing
 
 This is a team project.
 
-Please create a new branch for your feature (git checkout -b feature-name).
+-Please create a new branch for your feature:
 
-Submit a Pull Request to merge your changes into main.
+-git checkout -b feature-name
+
+
+-Submit a Pull Request to merge your changes into main.
