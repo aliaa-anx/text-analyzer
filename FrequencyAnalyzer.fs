@@ -1,6 +1,7 @@
 namespace TextAnalyzer
 
 open System.Text.RegularExpressions
+open Tokenizer
 
 module FrequencyAnalyzer =
 
@@ -13,11 +14,9 @@ module FrequencyAnalyzer =
         ]
 
     // Extract words from text
-    let extractWords (text: string) : string list =
-        Regex.Matches(text.ToLowerInvariant(), @"[a-z']+")
-        |> Seq.cast<Match>
-        |> Seq.map (fun m -> m.Value)
-        |> Seq.toList
+    let extractWords (tokenized: TokenizedText) : string list =
+        tokenized.Words
+        |> List.map (fun w -> w.ToLowerInvariant())
 
     // Remove stopwords
     let removeStopwords (words: string list) : string list =
@@ -39,8 +38,8 @@ module FrequencyAnalyzer =
         sortedFreqs |> List.truncate n
 
     // Public function
-    let analyze (text: string) : (string * int) list =
-        text
+    let analyze (tokenized: TokenizedText) : (string * int) list =
+        tokenized
         |> extractWords
         |> removeStopwords
         |> countFrequencies

@@ -23,7 +23,7 @@ module InputValidation =
                 let content = File.ReadAllText(filePath)
                 
                 if String.IsNullOrWhiteSpace(content) then
-                    Error "The file is empty."
+                    Error "The file is empty, Upload a .txt file that contains ACTUAL TEXT"
                 else
                     // Success! Return the RAW content.
                     Ok content
