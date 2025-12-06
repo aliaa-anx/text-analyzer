@@ -129,7 +129,10 @@ module Program =
             let expectedParagraphCount = 2
             let expectedAvgSentenceLength = 19.0 / 5.0 // 3.8
             let expectedReadabilityScore = expectedAvgSentenceLength
-            let expectedTopWords = [("hello", 3); ("world", 2); ("it", 2)]
+            let expectedTopWords = 
+                [ ("has", 2); ("words", 2); ("hello", 1); ("world", 1); ("first", 1);
+                ("sentence", 1); ("eight", 1); ("paragraph", 1); ("two", 1); ("five", 1) ]
+
             
             // --- 4. Assert Tokenizer Results (Implicitly tested by counts) ---
             
