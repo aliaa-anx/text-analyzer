@@ -63,6 +63,8 @@ open System
 open System.IO
 open Tokenizer
 open MetricsCalculator
+open FrequencyAnalyzer
+
 
 module Program = 
    // Simple assertion helper for testing without external libraries
@@ -102,7 +104,7 @@ module Program =
         let mutable metrics: MetricsCalculator.Metrics option = None
         let mutable rawContent: string option = None
 
-        // --- 2. Execute Pipeline: InputValidation -> Tokenizer -> MetricsCalculator ---
+        // --- 2. Execute Pipeline: InputValidation -> Tokenizer -> MetricsCalculator -> FrequencyAnalyzer ---
         
         printfn "\n--- Stage 1: InputValidation.tryReadFile ---"
         match InputValidation.tryReadFile testFilePath with
@@ -116,13 +118,19 @@ module Program =
             let calculatedMetrics = MetricsCalculator.calculateMetrics tokenized
             metrics <- Some calculatedMetrics
 
+            // --- Stage 4: FrequencyAnalyzer ---
+            printfn "\n--- Stage 4: Frequency Analyzer ---"
+            let topWords = FrequencyAnalyzer.analyze content
+            printfn "Top Words: %A" topWords
+
             // --- 3. Define Expected Outputs (Manual Analysis) ---
             let expectedWordCount = 19
             let expectedSentenceCount = 5
             let expectedParagraphCount = 2
             let expectedAvgSentenceLength = 19.0 / 5.0 // 3.8
             let expectedReadabilityScore = expectedAvgSentenceLength
-
+            let expectedTopWords = [("hello", 3); ("world", 2); ("it", 2)]
+            
             // --- 4. Assert Tokenizer Results (Implicitly tested by counts) ---
             
             // --- 5. Assert Metrics Results ---
@@ -130,6 +138,7 @@ module Program =
             success <- success && assertEqual expectedSentenceCount calculatedMetrics.SentenceCount "Sentence Count"
             success <- success && assertEqual expectedParagraphCount calculatedMetrics.ParagraphCount "Paragraph Count"
             
+
             // Use a tolerance for float comparisons (0.001)
             let avgPass = abs (expectedAvgSentenceLength - calculatedMetrics.AverageSentenceLength) < 0.001
             success <- success && avgPass
@@ -144,6 +153,13 @@ module Program =
                  printfn "  PASS: Readability Score (%.2f)" calculatedMetrics.ReadabilityScore
             else
                  printfn "  FAIL: Readability Score (Expected: %.2f, Actual: %.2f)" expectedReadabilityScore calculatedMetrics.ReadabilityScore
+
+            let freqPass = topWords = expectedTopWords
+            success <- success && freqPass
+            if freqPass then
+                printfn "  PASS: Frequency Analyzer"
+            else
+                printfn "  FAIL: Frequency Analyzer (Expected: %A, Actual: %A)" expectedTopWords topWords
 
         | Error msg -> 
             printfn "  FAIL: InputValidation failed: %s" msg
