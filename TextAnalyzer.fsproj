@@ -6,12 +6,13 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-  <ItemGroup>
-    <!-- The order is CRITICAL. Program.fs must be last. -->
-    <Compile Include="InputValidation.fs" />
-    <Compile Include="Tokenizer.fs" />
-    <Compile Include="Metrics.fs" />
-    <Compile Include="Program.fs" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Include="InputValidation.fs" />
+		<Compile Include="Tokenizer.fs" />
+		<Compile Include="Metrics.fs" />
+		<Compile Include="FrequencyAnalyzer.fs" />
+		<Compile Include="UI.fs" />
+		<Compile Include="Program.fs" />
+	</ItemGroup>
 
 </Project>
