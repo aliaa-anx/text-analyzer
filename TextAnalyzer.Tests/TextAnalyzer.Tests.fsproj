@@ -8,8 +8,12 @@
 
 
   <ItemGroup>
-  
+    
+    <Compile Include="InputValidationTests.fs" />
+    <Compile Include="FrequencyAnalyzerTests.fs" />
     <Compile Include="TokenizerTests.fs" />
+    <Compile Include="MetricesTests.fs" />
+    <Compile Include="E2ETests.fs" />
 
   </ItemGroup>
   <ItemGroup>

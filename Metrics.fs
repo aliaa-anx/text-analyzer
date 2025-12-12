@@ -88,19 +88,3 @@ module MetricsCalculator =
           AverageSentenceLength = avgSentenceLength
           ReadabilityScore = readabilityScore }
 
-
-
-// TESTING
-
-// let exampleTokenized : TokenizedText =
-//     { Words = ["I"; "love"; "AI"; "very"; "much"]
-//       Sentences = ["I love AI"; "very much"]
-//       Paragraphs = ["I love AI. very much"] }
-
-// let result = MetricsCalculator.calculateMetrics exampleTokenized
-
-// printfn "Word Count: %d" result.WordCount
-// printfn "Sentence Count: %d" result.SentenceCount
-// printfn "Paragraph Count: %d" result.ParagraphCount
-// printfn "Average Sentence Length: %f" result.AverageSentenceLength
-// printfn "Readability Score: %f" result.ReadabilityScore

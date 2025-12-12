@@ -1,8 +1,7 @@
 namespace TextAnalyzer.Tests
 
 open Xunit
-open TextAnalyzer // Opens the namespace where TokenizedText and Tokenizer live
-
+open TextAnalyzer 
 module TokenizerTests =
     // --- Word Tokenizer Tests (getwords) ---
 
@@ -260,18 +259,6 @@ module TokenizerTests =
         Assert.Equal<string list>(expectedSentences, actual.Sentences)
         Assert.Equal<string list>(expectedParagraphs, actual.Paragraphs)
 
-    //[<Fact>]
-    // let tokenize_handles_only_punctuation_and_newlines () =
-    //     let text = "!!!...???\n\n\r\r"
-    //     let expectedWords: string list = []
-    //     let expectedSentences: string list = []
-    //     let expectedParagraphs: string list = []
-    //     let actual = Tokenizer.tokenize text
-
-    //     // FIX: Explicit list comparison on the record fields
-    //     Assert.Equal<string list>(expectedWords, actual.Words)
-    //     Assert.Equal<string list>(expectedSentences, actual.Sentences)
-    //     Assert.Equal<string list>(expectedParagraphs, actual.Paragraphs)
 
     [<Fact>]
     let tokenize_handles_mixed_content () =
