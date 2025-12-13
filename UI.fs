@@ -191,6 +191,14 @@ module UI =
                 MessageBox.Show("JSON File exported successfully!") |> ignore
 
 
+
+        // to keep track of analysis state because we will need it when we wanna export to JSON
+        let mutable hasAnalyzed = false
+
+        // to keep the metrics calculations and frequecy analysis results because we will need it when we wanna export to JSON
+        let mutable lastMetricsCalculations : Metrics option = None     // we studied it in an earlier lecture, do u remember? if you don't go study!
+        let mutable lastFrequencyAnalysis : (string * int) list option = None
+
         // now what happens when we click any button? hmmmmmmmm.....
         do
             // Load Text From File
@@ -202,15 +210,27 @@ module UI =
                 if ofd.ShowDialog() = DialogResult.OK then
                     match tryReadFile ofd.FileName with
                     | Ok content -> txtInput.Text <- content        // if everything is oke then fill the textbox with the content of the textfile
-                    | Error msg -> MessageBox.Show(msg) |> ignore   // if the user bypassed the filter or the file is empty then an error message is displayed
+                    | Error msg ->                                  // if the user bypassed the filter or the file is empty then an error message is displayed
+                        MessageBox.Show(
+                            msg,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning
+                        ) |> ignore 
             )
 
             // analyze → validate → tokenize → metrics
             btnAnalyze.Click.Add(fun _ ->
-                // check the textbox if it contains text or if its empty
                 match validateManualInput txtInput.Text with
                 | Error msg ->
-                    MessageBox.Show(msg) |> ignore
+                    MessageBox.Show(
+                        msg,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    ) |> ignore
+                    // keep it false as it is to not let the user export amoty thing
+                    hasAnalyzed <- false
 
                 | Ok rawText ->
                     let tokenized = Tokenizer.tokenize rawText
@@ -220,15 +240,31 @@ module UI =
                     fillMetricsGrid metrics
                     fillFrequencyGrid frequencyAnalysis
 
+                    // as i just said we need to save these analysis results because we will need it when we wanna export to JSON, so FOCUS 0_0
+                    lastMetricsCalculations <- Some metrics
+                    lastFrequencyAnalysis <- Some frequencyAnalysis
+                    hasAnalyzed <- true
+
                     MessageBox.Show("Analysis Completed Successfully!") |> ignore
             )
 
             btnExportJSON.Click.Add(fun _ ->
-                match validateManualInput txtInput.Text with
-                | Error msg -> MessageBox.Show(msg) |> ignore
-                | Ok rawText ->
-                    let tokenized = Tokenizer.tokenize rawText
-                    let metrics = MetricsCalculator.calculateMetrics tokenized
-                    let frequencyAnalysis = FrequencyAnalyzer.analyze tokenized
-                    exportToJson metrics frequencyAnalysis
+                if not hasAnalyzed then
+                    MessageBox.Show(
+                        "Please analyze the text first before exporting.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    ) |> ignore
+                else
+                    match lastMetricsCalculations, lastFrequencyAnalysis with
+                    | Some metrics, Some frequency ->       // export only if their status is 'Some' means they contain values, if its 'None' then its empty so error
+                        exportToJson metrics frequency
+                    | _ ->
+                        MessageBox.Show(
+                            "Unexpected error: analysis data is missing.",
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        ) |> ignore
             )
