@@ -14,7 +14,7 @@ let outputLabel = new Label(Text = "", Top = 280, Left = 10, Width = 550, Height
 let cleanText (text: string) =
     Regex.Replace(text, @"\s+", " ").Trim()
 
-// Upload file buttonn
+// Upload file button
 uploadButton.Click.Add(fun _ ->
     use ofd = new OpenFileDialog(Filter = "All files|*.*")
 
