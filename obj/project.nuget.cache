@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qLqIqJhAGihgO6vTMEoiLhOt+0pEqthku+HjafJMZjd1Ybn1MMlHXQSi6iEu0igl2UxPG1wEnDqdNANCJ/O5NQ==",
+  "success": true,
+  "projectFilePath": "D:\\fourth term\\Projects\\Pl3Project\\colon\\text-analyzer\\TextAnalyzer.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dell\\.nuget\\packages\\fsharp.core\\8.0.100\\fsharp.core.8.0.100.nupkg.sha512"
+  ],
+  "logs": []
+}
